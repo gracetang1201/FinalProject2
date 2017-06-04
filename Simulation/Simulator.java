@@ -59,7 +59,7 @@ class Simulator{
     }
     */
     //ALL RETURNS ARE RADIANS!!
-    void updateLocation(Planet basic){
+    void updateLocation(){
       //System.out.println(existing.toString());
       ArrayList<String> directions = new ArrayList<String>();
       for(int i = 0; i < existing.size(); i++){
@@ -67,16 +67,16 @@ class Simulator{
         Planet orbit = existing.get(i);
         //System.out.println(orbit.name);
         if(this.compareTo(orbit) != 0){
-          if(basic.x >= orbit.x){
-            if (basic.y > orbit.y){
+          if(this.x >= orbit.x){
+            if (this.y > orbit.y){
             directions.add("up");
             directions.add("right");
             }else{
               directions.add("up");
               directions.add("right");
             }
-          }else if(basic.x <= orbit.x){
-            if(basic.y > orbit.y){
+          }else if(this.x <= orbit.x){
+            if(this.y > orbit.y){
               directions.add("down");
               directions.add("right");
             }else{
@@ -86,12 +86,13 @@ class Simulator{
           }
         
         //System.out.println(directions.toString());
-          double accel = calcAcceleration(orbit, basic, calcDist(orbit, basic));
-          double theta = Math.atan((orbit.x - basic.x) / (orbit.y - basic.y));
+          double accel = calcAcceleration(orbit, this, calcDist(orbit, this));
+          double theta = Math.atan((orbit.x - this.x) / (orbit.y - this.y));
           double accelinx = accel*(Math.sin(theta));
           double acceliny = accel*(Math.cos(theta));
-          System.out.println(directions.toString() + basic.x + " " + basic.y);
-          if(directions.get(0).equals("down")){
+          System.out.println(directions.toString() + this.x + " " + this.y);
+          if(directions.get(0).equals("down")){ //ERROR
+          
             acceliny = acceliny * -1;
           }
           if(directions.get(1).equals("left")){

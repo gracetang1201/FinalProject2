@@ -17,7 +17,7 @@ public void draw(){
 }
 public void updateLocations(Simulator s){
   for(int i = 0; i < s.existing.size(); i++){
-    s.existing.get(i).updateLocation(s.existing.get(i));
+    s.existing.get(i).updateLocation();
     ellipse(s.existing.get(i).x, s.existing.get(i).y, 100, 100);
   }
 }
