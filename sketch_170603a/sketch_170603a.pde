@@ -2,22 +2,24 @@ Simulator s = new Simulator();
 //String[] names = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "1"};
 int counter = 0;
 void setup(){
-  size(800, 600);
+  size(800, 800);
   ellipseMode(CENTER);
   background(255, 204, 0);
-  s.addPlanet("Sun", 100, 100, 2*Math.pow(10, 30));
+  s.addPlanet("Sun", 400, 400, 2*Math.pow(10, 2));
 }
 void draw(){
-  if(mousePressed){
-    s.addPlanet(("" + counter), mouseX, mouseY, 6*Math.pow(10, 24));
-    counter++;
-  }
-    
+    background(255, 204, 0);
+    s.updateLocations();
     for(int i = 0; i < s.existing.size(); i++){
       ellipse(s.existing.get(i).position.x, s.existing.get(i).position.y, 100, 100);
     }
-    s.updateLocations();
 }
+
+void mouseClicked(){
+    s.addPlanet(("" + counter), mouseX, mouseY, 6*Math.pow(10, 1));
+    counter++;
+}
+  
 
 
 class Simulator{
@@ -27,6 +29,7 @@ class Simulator{
   void addPlanet(String name, float x, float y, double mass){
     Planet temp = new Planet(name, x, y, mass);
     existing.add(temp);
+    ellipse(x, y, 100, 100);
   }
   
   void updateLocations(){
@@ -87,9 +90,9 @@ class Planet implements Comparable<Planet>{
   double accelerationinX(Planet other){
     int direction = 0;
     if (this.position.x >= other.position.x){
-      direction = 1;
-    }else{
       direction = -1;
+    }else{
+      direction = 1;
     }
     double accelInX = calcForceInX(other) * Math.cos(calcAngle(other)) / this.mass;
     return accelInX*direction;
