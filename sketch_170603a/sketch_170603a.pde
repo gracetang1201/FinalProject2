@@ -1,48 +1,22 @@
-Simulator s = new Simulator();
 //String[] names = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "1"};
 int counter = 0;
+ArrayList<Planet> planets = new ArrayList<Planet>();
 void setup(){
   size(800, 800);
   ellipseMode(CENTER);
-  background(255, 204, 0);
-  s.addPlanet("Sun", 400, 400, 2*Math.pow(10, 2));
+  background(25, 204, 0);
+  s.addPlanet("Sun", 400, 400, 5);
 }
 void draw(){
     background(255, 204, 0);
     s.updateLocations();
     for(int i = 0; i < s.existing.size(); i++){
-      ellipse(s.existing.get(i).position.x, s.existing.get(i).position.y, 100, 100);
+      ellipse(s.existing.get(i).position.x, s.existing.get(i).position.y, 30, 30);
     }
 }
-
-void mouseClicked(){
-    s.addPlanet(("" + counter), mouseX, mouseY, 6*Math.pow(10, 1));
-    counter++;
-}
-  
-
-
-class Simulator{
-
-  ArrayList<Planet> existing = new ArrayList<Planet>();
-  
-  void addPlanet(String name, float x, float y, double mass){
-    Planet temp = new Planet(name, x, y, mass);
-    existing.add(temp);
-    ellipse(x, y, 100, 100);
-  }
-  
-  void updateLocations(){
-    for(Planet me : existing){
-      for(Planet other : existing){
-        if(me.compareTo(other) != 0){
-          me.updatePosition(other);
-        }
-      }
-    }
-  }
   
 class Planet implements Comparable<Planet>{
+  /*
   double G = 6.673e-11;
   double sunmass = 1.98892e30;
   String name;
@@ -50,6 +24,52 @@ class Planet implements Comparable<Planet>{
   PVector velocity;
   PVector force;
   double mass;
+  */
+  String name;
+  PVector position;
+  PVector velocity;
+  PVector acceleration;
+  PVector  posOrbit;
+  PVector distance;
+  PVector middle;
+  float G = 500.0;
+  float r;
+  
+  Planet(String n){
+    name = n;
+    position = new PVector(300.0, 300.0);
+    velocity = new PVector(2.0, .5);
+    acceleration = new PVector(0.0, 0.0);
+    middle = new PVector(height * 0.5, width * 0.5);
+    distance = new PVector(0, 0);
+    r = 2.0;
+  }
+  
+  Planet(String n, float x, float y, float rad){
+    name = n;
+    position = new PVector(x, y);
+    velocity = new PVector(2.0, .5);
+    acceleration = new PVector(0.0, 0.0);
+    middle = new PVector(height * 0.5, width * 0.5);
+    distance = new PVector(0, 0);
+    rad = r;
+  }
+  
+  void updatePosition(Planet main){
+    
+    float magnitude = distance.mag();
+    acceleration.x = G* cos(distance.heading()) / pow(magnitude, 2);
+    acceleration.y = G* sin(distance.heading()) / pow(magnitude, 2);
+    velocity.x -= acceleration.x;
+    velocity.y -= acceleration.y;
+    position.x += velocity.x;
+    position.y += velocity.y;
+    fill(256,256,256);
+    ellipse(position.x, position.y, 2 * this.r, 2 * this.r);
+    fill(256,256,256);
+    ellipse(middle.x, middle.y, 30, 30);
+  }
+    
   
   int compareTo(Planet other){
     if(this.name.equals(other.name)){
@@ -59,7 +79,7 @@ class Planet implements Comparable<Planet>{
     }
   }
   
-
+/*
   Planet(String n, float x_, float y_, double m){
     position = new PVector(x_, y_);
     velocity = new PVector(1, 1);
@@ -134,5 +154,6 @@ class Planet implements Comparable<Planet>{
                       Math.pow((other.position.y - this.position.y), 2), 0.5);
     return distance;
   }
+  */
   }
-}
+ 
