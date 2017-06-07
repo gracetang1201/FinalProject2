@@ -58,7 +58,7 @@ void draw(){
     }
   }
 }
-  
+  /*
 class Planet implements Comparable<Planet>{
   /*
   double G = 6.673e-11;
@@ -198,7 +198,7 @@ class Planet implements Comparable<Planet>{
     return distance;
   }
   */
-  }
+  //}
   
   /*
   PVector pos, vel, v0, acc;
