@@ -1,18 +1,30 @@
 //String[] names = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "1"};
 int counter = 0;
 ArrayList<Planet> planets = new ArrayList<Planet>();
+void addPlanet(String name, float x, float y, float rad){
+  Planet p = new Planet(name, x, y, rad);
+  planets.add(p);
+}
+
 void setup(){
-  size(800, 800);
+  size(1000, 1000);
   ellipseMode(CENTER);
-  background(25, 204, 0);
-  s.addPlanet("Sun", 400, 400, 5);
+  background(0);
+  addPlanet("Sun", 400, 400, 30.0);
+  addPlanet("Earth", 200, 300, 10.0);
+  
 }
 void draw(){
-    background(255, 204, 0);
-    s.updateLocations();
-    for(int i = 0; i < s.existing.size(); i++){
-      ellipse(s.existing.get(i).position.x, s.existing.get(i).position.y, 30, 30);
+  background(0);
+  ellipse(400, 400, 10, 10);
+  for(Planet p : planets){
+    for(Planet goal : planets){
+      if(p.compareTo(goal) != 0){
+        p.updatePosition(goal);
+        System.out.println("cool");
+      }
     }
+  }
 }
   
 class Planet implements Comparable<Planet>{
@@ -29,10 +41,9 @@ class Planet implements Comparable<Planet>{
   PVector position;
   PVector velocity;
   PVector acceleration;
-  PVector  posOrbit;
-  PVector distance;
+  PVector focus;
   PVector middle;
-  float G = 500.0;
+  float G = 1500.0;
   float r;
   
   Planet(String n){
@@ -41,7 +52,6 @@ class Planet implements Comparable<Planet>{
     velocity = new PVector(2.0, .5);
     acceleration = new PVector(0.0, 0.0);
     middle = new PVector(height * 0.5, width * 0.5);
-    distance = new PVector(0, 0);
     r = 2.0;
   }
   
@@ -51,23 +61,24 @@ class Planet implements Comparable<Planet>{
     velocity = new PVector(2.0, .5);
     acceleration = new PVector(0.0, 0.0);
     middle = new PVector(height * 0.5, width * 0.5);
-    distance = new PVector(0, 0);
     rad = r;
   }
   
   void updatePosition(Planet main){
-    
-    float magnitude = distance.mag();
-    acceleration.x = G* cos(distance.heading()) / pow(magnitude, 2);
-    acceleration.y = G* sin(distance.heading()) / pow(magnitude, 2);
+    focus = new PVector(main.position.x, main.position.y);
+    PVector target = PVector.sub(position, focus);
+    float magnitude = focus.mag();
+    acceleration.x = G * cos(target.heading()) / pow(magnitude, 2);
+    acceleration.y = G * sin(target.heading()) / pow(magnitude, 2);
     velocity.x -= acceleration.x;
     velocity.y -= acceleration.y;
     position.x += velocity.x;
     position.y += velocity.y;
     fill(256,256,256);
-    ellipse(position.x, position.y, 2 * this.r, 2 * this.r);
+    ellipse(position.x % 800, position.y % 800, 2*r, 2*r);//black the projectile itself!
     fill(256,256,256);
-    ellipse(middle.x, middle.y, 30, 30);
+    ellipse(main.position.x % 800, main.position.y % 800, main.r * 2, main.r * 2);
+    System.out.println("cng");
   }
     
   
