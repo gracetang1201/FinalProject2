@@ -69,6 +69,7 @@ class Planet implements Comparable<Planet>{
   PVector force;
   double mass;
   */
+  /*
   String name;
   PVector position;
   PVector velocity;
@@ -121,7 +122,7 @@ class Planet implements Comparable<Planet>{
       return 1;
     }
   }
-  
+  */
 /*
   Planet(String n, float x_, float y_, double m){
     position = new PVector(x_, y_);
