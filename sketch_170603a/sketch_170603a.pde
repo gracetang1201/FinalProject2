@@ -1,35 +1,3 @@
-  PVector pos, vel, v0, acc;
-float radius = 3.0;
-PVector CM;
-PVector r;
-float m, Const = 3000;
-void setup() {
-  size(1000, 1000);
-  background(0);
-  pos = new PVector(150.0, 150.0);//initial position
-  v0 = new PVector(2.0, 0.25);//initial velocity
-  vel = new PVector(v0.x, v0.y);//velocity
-  acc = new PVector(0, 0);
-  CM = new PVector(height/2, width/2);
-  r = new PVector(0, 0);
-}
-void draw() {
-  if (mousePressed == false) {//hold down mouse to see path
-    background(0);
-  }
-  PVector r = PVector.sub(pos, CM);
-  m = r.mag();
-  acc.x =(Const*cos(r.heading()))/pow(m, 2);// 1 < cos(r.heading()) < -1
-  acc.y =(Const*sin(r.heading()))/pow(m, 2);
-  vel.x -= acc.x;
-  pos.x += vel.x;
-  vel.y -= acc.y;
-  pos.y += vel.y;
-  fill(256,256,256);
-  ellipse(pos.x, pos.y, 2*radius, 2*radius);//black the projectile itself!
-  fill(256,256,256);
-  ellipse(CM.x, CM.y, 40, 40);
-/*
 //String[] names = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "1"};
 int counter = 0;
 ArrayList<Planet> planets = new ArrayList<Planet>();
@@ -58,7 +26,7 @@ void draw(){
     }
   }
 }
-  /*
+  
 class Planet implements Comparable<Planet>{
   /*
   double G = 6.673e-11;
@@ -69,7 +37,6 @@ class Planet implements Comparable<Planet>{
   PVector force;
   double mass;
   */
-  /*
   String name;
   PVector position;
   PVector velocity;
@@ -122,7 +89,7 @@ class Planet implements Comparable<Planet>{
       return 1;
     }
   }
-  */
+  
 /*
   Planet(String n, float x_, float y_, double m){
     position = new PVector(x_, y_);
@@ -199,7 +166,7 @@ class Planet implements Comparable<Planet>{
     return distance;
   }
   */
-  //}
+  }
   
   /*
   PVector pos, vel, v0, acc;
@@ -210,6 +177,9 @@ float m, Const = 1000;
 void setup() {
   size(600, 600);
   background(0);
+  smooth();
+  frameRate(100);
+  noStroke();
   pos = new PVector(150.0, 150.0);//initial position
   v0 = new PVector(2.0, 0.222222222222222222222222222222);//initial velocity
   vel = new PVector(v0.x, v0.y);//velocity
@@ -229,8 +199,10 @@ void draw() {
   pos.x += vel.x;
   vel.y -= acc.y;
   pos.y += vel.y;
+  //stroke(#6BE1EA);
   fill(256,256,256);
   ellipse(pos.x, pos.y, 2*radius, 2*radius);//black the projectile itself!
+  //stroke(#FEFF00);
   fill(256,256,256);
   ellipse(CM.x, CM.y, 30, 30);
   /*println("pos.x = ", pos.x);
@@ -254,4 +226,3 @@ void draw() {
     loop();
 } 
 */
-}
