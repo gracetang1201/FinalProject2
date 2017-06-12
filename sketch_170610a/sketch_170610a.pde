@@ -9,7 +9,9 @@ void setup(){
   
 }
 void draw(){
-  background(0, 0, 0);
+  if(mousePressed == false){
+    background(0, 0, 0);
+  }
   ellipse(existing.get(0).rx, existing.get(0).ry, 10.0, 10.0);
   fill(255, 255, 255);
   //fill(existing.get(0).getColorR(), existing.get(0).getColorB(), existing.get(0).getColorG());
