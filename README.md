@@ -10,15 +10,15 @@ Current Bugs:
 
 -- 6/10/17: Planetary motion done.
 
--- 6/11/17: Central/initial planet not working properly
+-- 6/11/17: Central/initial planet not working properly, simulation isn't great for 2 bodies
 
 -- 6/11/17: The planets do not follow Kepler's laws
-
--- 6/11/17: Colors are not working properly
 
 Features:
 
 -- Click to add planet.
+
+-- Click and hold to view paths followed by planets
 
 Dev Log:
 
@@ -33,6 +33,8 @@ Dev Log:
 -- 6/7/17: Began progress on click to add body
 
 -- 6/10/17: Adding planets, gravity working properly, not to scale
+
+-- 6/11/17, 6/12/17: Coloring for planets work, paths work
 
 Disclaimer:
 
