@@ -2,6 +2,10 @@
 What is our project?
 Our project is an n-body simulator. We used physics to determine how celestial bodies would move if a given amount of them were in a close proximity to each other. We used processing to visualize how the planets would move. Created by Alex Lu and Grace Tang (The LuTang Clan).
 
+How to Play:
+-- cd into sketch_170610a.
+-- run sketch_170610a.pde.
+
 Current Bugs: 
 
 -- 6/5/17: Planets are not moving the right way.
