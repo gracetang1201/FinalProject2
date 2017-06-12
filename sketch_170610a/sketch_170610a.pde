@@ -40,6 +40,7 @@ void mouseClicked(){
 }
 
 void addPlanet(){
+int[]temp = {(int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)};
   existing.add(new Body((float)mouseX, (float)mouseY, 30, 30, 6e24, temp));
 }
 
